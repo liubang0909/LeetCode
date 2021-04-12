@@ -80,7 +80,70 @@ class ViewController: UIViewController {
         
         //平衡二叉树 测试数据
         // [3,9,20,null,null,15,7]
-//
+        //
+        //        let root : TreeNode = TreeNode(3);
+        //        let root1: TreeNode = TreeNode(9);
+        //        let root2: TreeNode = TreeNode(20);
+        //        root.left = root1;
+        //        root.right = root2;
+        //        let root3: TreeNode = TreeNode(15);
+        //        let root4: TreeNode = TreeNode(7);
+        //        root2.left = root3;
+        //        root2.right = root4;
+        //
+        
+        //[1,2,2,3,3,null,null,4,4]
+        //        let tempRoot:TreeNode = TreeNode(1);
+        //        let tempRoot1:TreeNode = TreeNode(2);
+        //        let tempRoot2:TreeNode = TreeNode(2);
+        //        tempRoot.left = tempRoot1;
+        //        tempRoot.right = tempRoot2;
+        //        let tempRoot3:TreeNode = TreeNode(3);
+        //        let tempRoot4:TreeNode = TreeNode(3);
+        //        tempRoot1.left = tempRoot3;
+        //        tempRoot1.right = tempRoot4;
+        //        let tempRoot5:TreeNode = TreeNode(4);
+        //        let tempRoot6:TreeNode = TreeNode(4);
+        //        tempRoot3.left = tempRoot5;
+        //        tempRoot3.right = tempRoot6;
+        //
+        //
+        //        print(self.isBalanced(root));
+        //        print(self.isBalanced(tempRoot));
+        //
+        //   翻转二叉树 测试数据
+        
+        //        let root : TreeNode = TreeNode(4);
+        //        let root1: TreeNode = TreeNode(2);
+        //        let root2: TreeNode = TreeNode(7);
+        //        root.left = root1;
+        //        root.right = root2;
+        //        let root3: TreeNode = TreeNode(1);
+        //        let root4: TreeNode = TreeNode(3);
+        //        root2.left = root3;
+        //        root2.right = root4;
+        //        let root5: TreeNode = TreeNode(6);
+        //        let root6: TreeNode = TreeNode(9);
+        //        root3.left = root5;
+        //        root3.right = root6;
+        //        print(self.invertTree(root)as Any);
+        //   从上到下打印二叉树 II
+        
+        //        let root : TreeNode = TreeNode(3);
+        //        let root1: TreeNode = TreeNode(9);
+        //        let root2: TreeNode = TreeNode(20);
+        //        root.left = root1;
+        //        root.right = root2;
+        //        let root3: TreeNode = TreeNode(15);
+        //        let root4: TreeNode = TreeNode(7);
+        //        root2.left = root3;
+        //        root2.right = root4;
+        //
+        //        print(self.levelOrder2(root)as Array);
+        
+        // 从上到下打印二叉树 I
+        //[3,9,20,null,null,15,7]
+        
 //        let root : TreeNode = TreeNode(3);
 //        let root1: TreeNode = TreeNode(9);
 //        let root2: TreeNode = TreeNode(20);
@@ -91,44 +154,7 @@ class ViewController: UIViewController {
 //        root2.left = root3;
 //        root2.right = root4;
 //
-        
-        //[1,2,2,3,3,null,null,4,4]
-//        let tempRoot:TreeNode = TreeNode(1);
-//        let tempRoot1:TreeNode = TreeNode(2);
-//        let tempRoot2:TreeNode = TreeNode(2);
-//        tempRoot.left = tempRoot1;
-//        tempRoot.right = tempRoot2;
-//        let tempRoot3:TreeNode = TreeNode(3);
-//        let tempRoot4:TreeNode = TreeNode(3);
-//        tempRoot1.left = tempRoot3;
-//        tempRoot1.right = tempRoot4;
-//        let tempRoot5:TreeNode = TreeNode(4);
-//        let tempRoot6:TreeNode = TreeNode(4);
-//        tempRoot3.left = tempRoot5;
-//        tempRoot3.right = tempRoot6;
-//
-//
-//        print(self.isBalanced(root));
-//        print(self.isBalanced(tempRoot));
-//
-     //   翻转二叉树 测试数据
-        
-//        let root : TreeNode = TreeNode(4);
-//        let root1: TreeNode = TreeNode(2);
-//        let root2: TreeNode = TreeNode(7);
-//        root.left = root1;
-//        root.right = root2;
-//        let root3: TreeNode = TreeNode(1);
-//        let root4: TreeNode = TreeNode(3);
-//        root2.left = root3;
-//        root2.right = root4;
-//        let root5: TreeNode = TreeNode(6);
-//        let root6: TreeNode = TreeNode(9);
-//        root3.left = root5;
-//        root3.right = root6;
-//        print(self.invertTree(root)as Any);
-        
-        
+//        print(self.levelOrder(root)as Array);
         
     }
     
@@ -143,11 +169,97 @@ class ViewController: UIViewController {
             self.right = nil
         }
     }
+    // MARK: - 剑指 Offer 32 - I. 从上到下打印二叉树
+    
+    
+    
+    func levelOrder(_ root: TreeNode?) -> [Int] {
+        
+        var array = [Int]()
+        if root == nil {
+            return array
+        }
+        var queueArray = [TreeNode]()
+        queueArray.append(root ?? TreeNode(0))
+        
+        
+        while queueArray.count != 0 {
+            
+            for _ in queueArray {
+                
+                let node = queueArray.first
+                queueArray.remove(at: 0)
+                array.append(node?.val ?? 0 )
+                
+                if node?.left != nil {
+                    queueArray.append(node?.left ?? TreeNode(0))
+                }
+                
+                if node?.right != nil {
+                    queueArray.append(node?.right ?? TreeNode(0))
+                }
+                
+            }
+            
+            
+            
+        }
+        
+        
+        return array;
+        
+    }
+    
+    
+    // MARK: - 剑指 Offer 32 - II. 从上到下打印二叉树 II
+    
+    func levelOrder2(_ root: TreeNode?) -> [[Int]] {
+        
+        var array = [[Int]]()
+        if root == nil {
+            return array
+        }
+        
+        var queueArray = [TreeNode]()
+        queueArray.append(root ?? TreeNode(0))
+        
+        while queueArray.count != 0 {
+            
+            var tempArray = [Int]()
+            
+            for _ in queueArray {
+                
+                let node = queueArray.first;
+                queueArray.remove(at: 0);
+                tempArray.append(node?.val ?? 0)
+                if node?.left != nil {
+                    queueArray.append(node?.left ?? TreeNode(0))
+                }
+                if node?.right != nil {
+                    queueArray.append(node?.right ?? TreeNode(0))
+                    
+                }
+            }
+            array.append(tempArray)
+            
+            
+        }
+        
+        return array;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     // MARK: -  翻转二叉树
     
     func invertTree(_ root: TreeNode?) -> TreeNode? {
-
+        
         if(root == nil)
         {
             return nil
@@ -182,9 +294,9 @@ class ViewController: UIViewController {
         
         let leftDepth = self.treeDepth(root?.left);
         let rightDepth = self.treeDepth(root?.right);
-
+        
         return abs(leftDepth - rightDepth) <= 1 && self.isBalanced(root?.left) && isBalanced(root?.right);
-
+        
     }
     
     func treeDepth(_ root: TreeNode?) -> Int {
